@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional To-Do List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #f3ec78, #af4261);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 0.5rem;
+            border: 2px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: #af4261;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #f3ec78;
+            color: #af4261;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f3ec78;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        li:nth-child(odd) {
+            background: #af4261;
+            color: white;
+        }
+
+        li button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        li button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Add a new task">
+            <button type="submit">Add</button>
+        </form>
+        <ul id="todo-list"></ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('todo-form');
+            const input = document.getElementById('todo-input');
+            const list = document.getElementById('todo-list');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const task = input.value.trim();
+
+                if (task) {
+                    addTask(task);
+                    input.value = '';
+                }
+            });
+
+            function addTask(task) {
+                const li = document.createElement('li');
+                li.textContent = task;
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.addEventListener('click', () => {
+                    li.remove();
+                });
+                li.appendChild(removeBtn);
+                list.appendChild(li);
+            }
+        });
+    </script>
+</body>
+</html>
